@@ -9,6 +9,28 @@ class lembaga extends Model
 {
     use HasFactory;
 
+    // Nama tabel di database
+    protected $table = 'lembagas';
+
+    // Kolom yang dapat diisi (mass assignable)
+    protected $fillable = [
+        'id_prov',
+        'id_kab_kota',
+        'id_kec',
+        'id_kel_desa',
+        'nama_lembaga',
+        'nama_perpus',
+        'NPP',
+        'alamat',
+        'rt',
+        'rw',
+        'email_lembaga',
+        'email_perpus',
+        'status_aktif',
+        'created_by',
+        'updated_by',
+    ];
+
     // one to Many dari tabel provinsi
      public function provinsi() {
         return $this->belongsTo(provinsi::class, 'id_prov');

@@ -17,7 +17,7 @@
         </a>
         <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="">
+            <a class="nav-link {{ request()->is('lembaga') ? 'active' : 'collapsed'}}" href="{{ url('lembaga') }}">
               <i class="bi bi-circle"></i><span>Lembaga</span>
             </a>
           </li>

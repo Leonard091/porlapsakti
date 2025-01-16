@@ -8,7 +8,10 @@ use App\Http\Controllers\redirectController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\sesiController;
 use App\Http\Controllers\usersController;
-
+use App\Http\Controllers\LembagaController;
+use App\Http\Controllers\kabupatenKotaController;
+use App\Http\Controllers\KecamatanController;
+use App\Http\Controllers\KelurahanDesaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -62,6 +65,19 @@ Route::group(['middleware' => ['auth', 'checkrole:1']], function() {
 
     //manajemen kegiatan
     Route::get('/event', [eventController::class, 'index']);
+
+    // manajemen lembaga
+    Route::get('/lembaga', [LembagaController::class, 'index'])->name('lembaga.index');
+    Route::get('/lembaga/create', [LembagaController::class, 'create'])->name('lembaga.create');
+    Route::post('/lembaga', [LembagaController::class, 'store'])->name('lembaga.store');
+
+    // manajemen kabupaten kota
+    Route::get('/get-kabupaten-kota/{id_provinsi}', [KabupatenKotaController::class, 'getKabupatenKota']);
+
+    // manajemen kecamatan
+    Route::get('/get-kecamatan/{id_kab_kota}', [KecamatanController::class, 'getKecamatan']);
+
+    Route::get('/get-kelurahan-desa/{id_kecamatan}', [KelurahanDesaController::class, 'getKelurahanDesa']);
     
 });
 

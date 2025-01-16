@@ -62,10 +62,12 @@
                                         <td>{{ $lembaga->rw }}</td>
                                         <td>
                                             <div class="btn-group" role="group">
-                                                <a href="{{ url('lembaga/' . $lembaga->id . '/edit') }}" class="btn btn-warning btn-sm" data-bs-toggle="tooltip" title="Edit">
+                                                <!-- Tombol Edit -->
+                                                <a href="{{ route('lembaga.edit', $lembaga->id) }}" class="btn btn-warning btn-sm" data-bs-toggle="tooltip" title="Edit">
                                                     <i class="ri-edit-2-fill"></i>
                                                 </a>
-                                                <form action="{{ url('lembaga/' . $lembaga->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus lembaga ini?')">
+                                                <!-- Tombol Hapus -->
+                                                <form action="{{ route('lembaga.destroy', $lembaga->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus lembaga ini?')">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm" data-bs-toggle="tooltip" title="Hapus">
@@ -73,7 +75,7 @@
                                                     </button>
                                                 </form>
                                             </div>
-                                        </td>
+                                        </td>       
                                     </tr>
                                 @empty
                                     <tr>

@@ -22,12 +22,12 @@
             </a>
           </li>
           <li>
-            <a href="">
+            <a class="nav-link {{ request()->is('provinsi') ? 'active' : 'collapsed'}}" href="{{ url('provinsi')}}">
               <i class="bi bi-circle"></i><span>Provinsi</span>
             </a>
           </li>
           <li>
-            <a href="">
+            <a class="nav-link {{ request()->is('kabupaten_kota') ? 'active' : 'collapsed'}}" href="{{ url('kabupaten_kota')}}">
               <i class="bi bi-circle"></i><span>Kabupaten/Kota</span>
             </a>
           </li>

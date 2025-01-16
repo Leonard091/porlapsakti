@@ -60,7 +60,11 @@ class lembagaController extends Controller
     {
         $lembaga = Lembaga::findOrFail($id);
         $provinces = Provinsi::all();
-        return view('adminpus.lembaga.edit', compact('lembaga', 'provinces'));
+        $kabupatenKotas = kab_kota::where('id_prov', $lembaga->id_prov)->get();
+        $kecamatans = kecamatan::where('id_kab_kota', $lembaga->id_kab_kota)->get();
+        $kelurahanDesas = kel_desa::where('id_kecamatan', $lembaga->id_kec)->get();
+
+    return view('adminpus.lembaga.edit', compact('lembaga', 'provinces', 'kabupatenKotas', 'kecamatans', 'kelurahanDesas'));
     }
 
     // Memperbarui data lembaga
@@ -70,9 +74,9 @@ class lembagaController extends Controller
             'id_prov' => 'required',
             'id_kab_kota' => 'required',
             'id_kec' => 'required',
-            'id_kelurahan' => 'required',
+            'id_kel_desa' => 'required',
             'nama_lembaga' => 'required|max:300',
-            'nama_perpustakaan' => 'required|max:300',
+            'nama_perpus' => 'required|max:300',
             'alamat' => 'required',
             'rt' => 'required|max:5',
             'rw' => 'required|max:5',
@@ -80,7 +84,7 @@ class lembagaController extends Controller
             'email_perpus' => 'required|email',
         ]);
 
-        $validated['updated_by'] = auth()->user()->name;
+        $validated['updated_by'] = auth()->user()->username;
 
         Lembaga::findOrFail($id)->update($validated);
 
@@ -90,7 +94,9 @@ class lembagaController extends Controller
     // Menghapus data lembaga
     public function destroy($id)
     {
-        Lembaga::findOrFail($id)->delete();
+        $lembaga = Lembaga::findOrFail($id);
+        $lembaga->delete();
+
         return redirect()->route('lembaga.index')->with('success', 'Lembaga berhasil dihapus!');
-    }
+}
 }

@@ -19,6 +19,6 @@ class kecamatan extends Model
     }
 
     public function kelurahanDesas() {
-        return $this->hasMany(Kel_desa::class, 'id_kecamatan');
+        return $this->hasMany(Kel_desa::class, 'id_kec');
     }
 }

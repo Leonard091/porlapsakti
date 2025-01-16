@@ -12,6 +12,8 @@ use App\Http\Controllers\LembagaController;
 use App\Http\Controllers\kabupatenKotaController;
 use App\Http\Controllers\KecamatanController;
 use App\Http\Controllers\KelurahanDesaController;
+use App\Http\Controllers\ProvinsiController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -70,7 +72,11 @@ Route::group(['middleware' => ['auth', 'checkrole:1']], function() {
     Route::get('/lembaga', [LembagaController::class, 'index'])->name('lembaga.index');
     Route::get('/lembaga/create', [LembagaController::class, 'create'])->name('lembaga.create');
     Route::post('/lembaga', [LembagaController::class, 'store'])->name('lembaga.store');
+    Route::get('/lembaga/{id}/edit', [LembagaController::class, 'edit'])->name('lembaga.edit');
+    Route::delete('/lembaga/{id}', [LembagaController::class, 'destroy'])->name('lembaga.destroy');
+    Route::patch('/lembaga/{id}', [LembagaController::class, 'update'])->name('lembaga.update');
 
+    
     // manajemen kabupaten kota
     Route::get('/get-kabupaten-kota/{id_provinsi}', [KabupatenKotaController::class, 'getKabupatenKota']);
 
@@ -78,6 +84,12 @@ Route::group(['middleware' => ['auth', 'checkrole:1']], function() {
     Route::get('/get-kecamatan/{id_kab_kota}', [KecamatanController::class, 'getKecamatan']);
 
     Route::get('/get-kelurahan-desa/{id_kecamatan}', [KelurahanDesaController::class, 'getKelurahanDesa']);
+
+    // Route resource untuk CRUD Provinsi
+    Route::resource('provinsi', ProvinsiController::class);
+
+    // Route Kabupaten Kota
+    Route::resource('kabupaten_kota', kabupatenKotaController::class);
     
 });
 
